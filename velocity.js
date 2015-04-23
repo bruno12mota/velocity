@@ -10,10 +10,17 @@
 /* These shimmed functions are only used if jQuery isn't present. If both this shim and jQuery are loaded, Velocity defaults to jQuery proper. */
 /* Browser support: Using this shim instead of jQuery proper removes support for IE8. */
 
+var isServer = typeof document === 'undefined';
+
+if(!isServer) {
 ;(function (window) {
     /***************
          Setup
     ***************/
+
+    if(isServer){
+      return;
+    }
 
     /* If jQuery is already loaded, there's no point in loading this shim. */
     if (window.jQuery) {
@@ -407,6 +414,10 @@
 ******************/
 
 ;(function (factory) {
+  if(isServer){
+    return;
+  }
+
     /* CommonJS module. */
     if (typeof module === "object" && typeof module.exports === "object") {
         module.exports = factory();
@@ -419,6 +430,9 @@
     }
 }(function() {
 return function (global, window, document, undefined) {
+  if(isServer){
+    return;
+  }
 
     /***************
         Summary
@@ -2190,7 +2204,7 @@ return function (global, window, document, undefined) {
                             }
 
                             /* Iterate through the calls targeted by the stop command. */
-                            $.each(elements, function(l, element) {                                
+                            $.each(elements, function(l, element) {
                                 /* Check that this call was applied to the target element. */
                                 if (element === activeElement) {
                                     /* Optionally clear the remaining queued calls. */
@@ -3473,7 +3487,7 @@ return function (global, window, document, undefined) {
                             tween.currentValue = currentValue;
 
                             /* If we're tweening a fake 'tween' property in order to log transition values, update the one-per-call variable so that
-                               it can be passed into the progress callback. */ 
+                               it can be passed into the progress callback. */
                             if (property === "tween") {
                                 tweenDummyValue = currentValue;
                             } else {
@@ -3858,6 +3872,7 @@ return function (global, window, document, undefined) {
     return Velocity;
 }((window.jQuery || window.Zepto || window), window, document);
 }));
+}
 
 /******************
    Known Issues
