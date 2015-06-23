@@ -3880,16 +3880,7 @@ return function (global, window, document, undefined) {
 /* VelocityJS.org UI Pack (5.0.4). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License. Portions copyright Daniel Eden, Christian Pucci. */
 
 ;(function (factory) {
-    /* CommonJS module. */
-    if (typeof require === "function" && typeof exports === "object" ) {
-        module.exports = factory();
-    /* AMD module. */
-    } else if (typeof define === "function" && define.amd) {
-        define([ "velocity" ], factory);
-    /* Browser globals. */
-    } else {
-        factory();
-    }
+    factory();
 }(function() {
 return function (global, window, document, undefined) {
 
